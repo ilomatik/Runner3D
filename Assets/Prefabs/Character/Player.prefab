@@ -393,9 +393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77d2f978dd441498a03c545919d3d6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swerveSpeed: 0.5
-  maxSwerveAmount: 0.25
-  playerXMovementBoundary: 1.75
+  playerXMovementBoundary: 1.6
+  horizontalMovement: 4
 --- !u!114 &5223405996474932798
 MonoBehaviour:
   m_ObjectHideFlags: 0

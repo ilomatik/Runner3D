@@ -3,6 +3,7 @@ using Collectables;
 using Managers;
 using Obstacles;
 using UnityEngine;
+using CameraType = Managers.CameraType;
 
 namespace Player
 {
@@ -23,8 +24,8 @@ namespace Player
                 
                 if (healthValue != 0) return;
                 
-                GameManager.Instance.SetIsPlaying(false);
                 GetComponent<PlayerAnimationController>().SetGameFinish();
+                GameManager.Instance.SetIsPlaying(false);
                 UIManager.Instance.SetLostGoldText(ScoreManager.Instance.GetCurrentLevelGoldValue());
                 UIManager.OnUIStateChange?.Invoke(UIState.Lost);
             }
@@ -61,6 +62,9 @@ namespace Player
             }
             else if (collision.transform.CompareTag("FinishLine")) 
             {
+                Destroy(collision.gameObject);
+                GetComponent<PlayerAnimationController>().SetGameFinish();
+                CameraManager.Instance.TransitionTo(CameraType.LevelEnd);
                 GameManager.Instance.SetIsPlaying(false);
                 ScoreManager.Instance.SetGoldValue(ScoreManager.Instance.GetCurrentLevelGoldValue());
                 ScoreManager.Instance.SaveGoldValue();
