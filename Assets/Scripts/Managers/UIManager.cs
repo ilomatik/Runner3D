@@ -31,9 +31,11 @@ namespace Managers
         
         public static UIManager Instance;
         
-        [SerializeField] private TextMeshProUGUI goldText;
+        [SerializeField] private TextMeshProUGUI goldTextUpgrade;
+        [SerializeField] private TextMeshProUGUI goldTextGame;
         [SerializeField] private TextMeshProUGUI healthText;
-        [SerializeField] private TextMeshProUGUI levelText;
+        [SerializeField] private TextMeshProUGUI levelTextUpgrade;
+        [SerializeField] private TextMeshProUGUI levelTextGame;
         [SerializeField] private TextMeshProUGUI lostGoldText;
         [SerializeField] private TextMeshProUGUI wonGoldText;
         [SerializeField] private TextMeshProUGUI levelEndTotalGoldText;
@@ -76,9 +78,15 @@ namespace Managers
 
         public void SetLevelText(int value)
         {
-            if (levelText == null) return;
+            if (levelTextUpgrade != null)
+            {
+                levelTextUpgrade.text = "Level " + value;
+            }
 
-            levelText.text = "Level " + value;
+            if (levelTextGame != null)
+            {
+                levelTextGame.text = "Level " + value;
+            }
         }
 
         private void SetHealthText(int value)
@@ -95,34 +103,36 @@ namespace Managers
 
         public void SetWonGoldText(int wonGold)
         {
-            wonGoldText.text = "You Won " + wonGold + " Gold";
+            wonGoldText.text = wonGold.ToString();
         }
 
         public void SetLevelEndTotalGoldText(int totalGoldValue)
         {
-            levelEndTotalGoldText.text = "You Have Total " + totalGoldValue + " Gold";
+            levelEndTotalGoldText.text = "Total Gold " + totalGoldValue;
         }
         
         public void SetGoldText(string text)
         {
-            if (goldText == null) return;
-            
-            goldText.text = text;
+            if (goldTextUpgrade != null) goldTextUpgrade.text = text;
+            if (goldTextGame != null) goldTextGame.text = text;
         }
 
         public void PlayButton()
         {
             OnUIStateChange?.Invoke(UIState.Game);
+            GameManager.Instance.SetIsPlaying(true);
             GameManager.Instance.GetPlayerAnimationController().SetPlayerRun();
         }
 
         public void RetryButton()
         {
+            OnUIStateChange?.Invoke(UIState.Upgrade);
             LevelManager.Instance.SetLevel();
         }
 
         public void NextButton()
         {
+            OnUIStateChange?.Invoke(UIState.Upgrade);
             LevelManager.Instance.IncreaseLevel();
             LevelManager.Instance.SetLevel();
         }
