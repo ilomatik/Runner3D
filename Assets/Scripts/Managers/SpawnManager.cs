@@ -28,7 +28,7 @@ namespace Managers
         {
             if (spawnedLevel != null)
             {
-                Destroy(spawnedLevel);
+                Destroy(spawnedLevel.gameObject);
             }
 
             spawnedLevel = Instantiate(level, Vector3.zero, Quaternion.identity);
