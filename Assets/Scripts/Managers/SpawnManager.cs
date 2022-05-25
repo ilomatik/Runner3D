@@ -35,6 +35,8 @@ namespace Managers
             LevelManager.Instance.SetPlayerTransform(spawnedLevel.GetPlayer().transform);
             GameManager.Instance.SetPlayer(spawnedLevel.GetPlayer());
             GameManager.Instance.SetPlayerAnimationController(spawnedLevel.GetPlayerAnimationController());
+            CameraManager.Instance.TransitionTo(CameraType.Game);
+            CameraManager.Instance.SetCameraFollowTransform(GameManager.Instance.GetPlayer().transform);
         }
 
         #endregion

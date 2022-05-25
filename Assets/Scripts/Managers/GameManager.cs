@@ -38,8 +38,8 @@ namespace Managers
         private void GameStartFunctions()
         {
             UIManager.OnUIStateChange?.Invoke(UIState.Upgrade);
-            LevelManager.Instance.SetLevel();
             CameraManager.Instance.CameraStartFunctions();
+            LevelManager.Instance.SetLevel();
             ScoreManager.Instance.LoadGoldValue();
             UpgradeManager.Instance.LoadUpgradeLevels();
             PoolManager.Instance.CreatePools();

@@ -51,7 +51,7 @@ namespace Managers
         internal void CameraStartFunctions()
         {
             SetDefaultCamera();
-            SetCameraFollowTransform(LevelManager.Instance.GetPlayerTransform());
+            //SetCameraFollowTransform(LevelManager.Instance.GetPlayerTransform());
         } 
 
         public void SetCameraFollowTransform(Transform followTransform)
