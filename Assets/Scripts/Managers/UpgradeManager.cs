@@ -35,6 +35,9 @@ namespace Managers
 
         public void IncreaseUpgradeLevel(UpgradeType upgradeType)
         {
+            ScoreManager.Instance.SetGoldValue(-GetCurrentUpgradeLevelPrice(upgradeType));
+            ScoreManager.Instance.SaveGoldValue();
+            
             switch (upgradeType)
             {
                 case UpgradeType.EarningGold:
@@ -49,9 +52,7 @@ namespace Managers
                     throw new ArgumentOutOfRangeException(nameof(upgradeType), upgradeType, null);
             }
             
-            ScoreManager.Instance.SetGoldValue(-GetCurrentUpgradeLevelPrice(upgradeType));
             SaveUpgradeLevels();
-            ScoreManager.Instance.SaveGoldValue();
         }
 
         public int GetCurrentUpgradeLevel(UpgradeType upgradeType)
@@ -82,20 +83,24 @@ namespace Managers
             return upgradeLevelPrice;
         }
 
-        public bool GetUpgradeability(UpgradeType upgradeType)
+        public bool GetUpgradeability(UpgradeType upgradeType, int goldValue)
         {
             var temp = upgradeType switch
             {
                 UpgradeType.EarningGold => earningGoldUpgradeLevel < GetCurrentUpgrade(upgradeType).price.Count
                     ? earningGoldUpgradeLevel
-                    : GetCurrentUpgrade(upgradeType).price.Count - 1,
+                    : GetCurrentUpgrade(upgradeType).price.Count,
                 UpgradeType.PlayerHealth => playerHealthUpgradeLevel < GetCurrentUpgrade(upgradeType).price.Count
                     ? playerHealthUpgradeLevel
-                    : GetCurrentUpgrade(upgradeType).price.Count - 1,
+                    : GetCurrentUpgrade(upgradeType).price.Count,
                 _ => throw new ArgumentOutOfRangeException(nameof(upgradeType), upgradeType, null)
             };
 
-            var value = GetCurrentUpgrade(upgradeType).price[temp] <= ScoreManager.Instance.GetGoldValue();
+            var value = GetCurrentUpgrade(upgradeType).price[temp - 1] <= goldValue;
+            
+            Debug.Log($"GetUpgradeability is working goldValue : {goldValue}");
+            Debug.Log($"GetUpgradeability is working temp : {temp}");
+            Debug.Log($"GetUpgradeability is working value : {value}");
 
             return value;
         }

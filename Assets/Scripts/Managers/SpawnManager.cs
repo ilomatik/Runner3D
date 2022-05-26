@@ -24,7 +24,7 @@ namespace Managers
 
         #region Custom Functions
 
-        public void SpawnCurrentLevel(Level level)
+        public void SpawnCurrentLevel(Level level, int currentLevel)
         {
             if (spawnedLevel != null)
             {
@@ -32,6 +32,9 @@ namespace Managers
             }
 
             spawnedLevel = Instantiate(level, Vector3.zero, Quaternion.identity);
+            UIManager.Instance.SetLevelText(currentLevel);
+            ScoreManager.Instance.ResetCurrentLevelGoldValue();
+            ScoreManager.OnGoldValueChange?.Invoke(ScoreManager.Instance.GetGoldValue());
             LevelManager.Instance.SetPlayerTransform(spawnedLevel.GetPlayer().transform);
             GameManager.Instance.SetPlayer(spawnedLevel.GetPlayer());
             GameManager.Instance.SetPlayerAnimationController(spawnedLevel.GetPlayerAnimationController());

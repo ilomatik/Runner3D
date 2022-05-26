@@ -47,7 +47,7 @@ namespace UI
 
         private void SetButtonInteractable(int value)
         {
-            var upgradeability = UpgradeManager.Instance.GetUpgradeability(upgradeType);
+            var upgradeability = UpgradeManager.Instance.GetUpgradeability(upgradeType, value);
             button.interactable = upgradeability;
             
             if (upgradeability)

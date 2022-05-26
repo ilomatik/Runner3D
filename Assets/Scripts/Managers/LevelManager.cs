@@ -18,15 +18,10 @@ namespace Managers
         #endregion
 
         #region Unity Functions
-        
+
         private void Awake()
         {
             Instance = this;
-        }
-
-        private void Start()
-        {
-            UIManager.Instance.SetLevelText(levelData.GetCurrentLevel());
         }
 
         #endregion
@@ -38,8 +33,8 @@ namespace Managers
             var currentLevel = levelData.GetCurrentLevel() <= levels.Count - 1
                 ? levels[levelData.GetCurrentLevel()]
                 : levels[levels.Count - 1];
-            
-            SpawnManager.Instance.SpawnCurrentLevel(currentLevel);
+
+            SpawnManager.Instance.SpawnCurrentLevel(currentLevel, levelData.GetCurrentLevel());
         }
 
         public void IncreaseLevel()
@@ -56,7 +51,7 @@ namespace Managers
         {
             return levelData.GetCurrentLevel();
         }
-        
+
         public Transform GetPlayerTransform()
         {
             return playerTransform;

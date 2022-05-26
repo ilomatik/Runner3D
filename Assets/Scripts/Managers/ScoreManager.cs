@@ -22,7 +22,6 @@ namespace Managers
             {
                 goldValue = value;
                 OnGoldValueChange?.Invoke(goldValue);
-                UIManager.Instance.SetGoldText(GoldValue.ToString());
 
                 if (goldValue > maxGoldValue)
                 {
@@ -49,6 +48,7 @@ namespace Managers
         public void SetGoldValue(int value)
         {
             GoldValue += value;
+            OnGoldValueChange?.Invoke(GoldValue);
         }
 
         public int GetGoldValue()
@@ -59,7 +59,7 @@ namespace Managers
         public void SetCurrentLevelGoldValue(int value)
         {
             currentLevelGoldValue += value;
-            UIManager.Instance.SetGoldText((GoldValue + currentLevelGoldValue).ToString());
+            OnGoldValueChange?.Invoke(GoldValue + currentLevelGoldValue);
         }
 
         public int GetCurrentLevelGoldValue()
@@ -74,7 +74,7 @@ namespace Managers
 
         public void SaveGoldValue()
         {
-            goldData.IncreaseGoldValue(GoldValue);
+            goldData.SetGoldValue(GoldValue);
         }
 
         internal void LoadGoldValue()

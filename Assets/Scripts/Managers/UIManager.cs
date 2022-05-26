@@ -55,12 +55,14 @@ namespace Managers
         private void Start()
         {
             OnUIStateChange += SetUIState;
+            ScoreManager.OnGoldValueChange += SetGoldText;
             GameManager.OnHealthValueChange += SetHealthText;
         }
 
         private void OnDestroy()
         {
             OnUIStateChange -= SetUIState;
+            ScoreManager.OnGoldValueChange -= SetGoldText;
             GameManager.OnHealthValueChange -= SetHealthText;
         }
 
@@ -111,10 +113,10 @@ namespace Managers
             levelEndTotalGoldText.text = "Total Gold " + totalGoldValue;
         }
         
-        public void SetGoldText(string text)
+        public void SetGoldText(int text)
         {
-            if (goldTextUpgrade != null) goldTextUpgrade.text = text;
-            if (goldTextGame != null) goldTextGame.text = text;
+            if (goldTextUpgrade != null) goldTextUpgrade.text = text.ToString();
+            if (goldTextGame != null) goldTextGame.text = text.ToString();
         }
 
         public void PlayButton()
