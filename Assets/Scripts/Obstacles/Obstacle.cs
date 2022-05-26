@@ -20,7 +20,9 @@ namespace Obstacles
 
         public void DestroyObstacle()
         {
-            PoolManager.Instance.GetPoolObject(PoolType.ObstacleParticle);
+            var particleObject = PoolManager.Instance.GetPoolObject(PoolType.ObstacleParticle);
+            particleObject.transform.position = transform.position;
+            particleObject.SetActive(true);
             Destroy(gameObject);
         }
 
