@@ -395,6 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerXMovementBoundary: 1.6
   horizontalMovement: 4
+  turnDuration: 0.25
 --- !u!114 &5223405996474932798
 MonoBehaviour:
   m_ObjectHideFlags: 0

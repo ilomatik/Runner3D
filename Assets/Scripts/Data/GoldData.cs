@@ -20,9 +20,9 @@ namespace Data
             return currentGoldValue;
         }
 
-        public void IncreaseGoldValue(int value)
+        public void SetGoldValue(int value)
         {
-            currentGoldValue += value;
+            currentGoldValue = value;
             SaveGoldValue();
         }
 
