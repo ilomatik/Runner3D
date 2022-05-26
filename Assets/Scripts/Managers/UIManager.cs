@@ -110,7 +110,7 @@ namespace Managers
 
         public void SetLevelEndTotalGoldText(int totalGoldValue)
         {
-            levelEndTotalGoldText.text = "Total Gold " + totalGoldValue;
+            levelEndTotalGoldText.text = totalGoldValue.ToString();
         }
         
         public void SetGoldText(int text)

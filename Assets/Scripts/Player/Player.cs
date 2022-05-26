@@ -98,6 +98,11 @@ namespace Player
             HealthValue -= healthDecreaseValue;
         }
 
+        public void ResetPlayerHealth()
+        {
+            SetPlayerStartHealthValue(UpgradeManager.Instance.GetCurrentUpgradeLevel(UpgradeType.PlayerHealth - 1));
+        }
+
         #endregion
     }
 }
