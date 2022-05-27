@@ -97,10 +97,6 @@ namespace Managers
             };
 
             var value = GetCurrentUpgrade(upgradeType).price[temp - 1] <= goldValue;
-            
-            Debug.Log($"GetUpgradeability is working goldValue : {goldValue}");
-            Debug.Log($"GetUpgradeability is working temp : {temp}");
-            Debug.Log($"GetUpgradeability is working value : {value}");
 
             return value;
         }

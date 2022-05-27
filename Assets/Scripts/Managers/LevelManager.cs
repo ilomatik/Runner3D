@@ -31,7 +31,7 @@ namespace Managers
         public void SetLevel()
         {
             var currentLevel = levelData.GetCurrentLevel() <= levels.Count - 1
-                ? levels[levelData.GetCurrentLevel()]
+                ? levels[levelData.GetCurrentLevel() - 1]
                 : levels[levels.Count - 1];
 
             SpawnManager.Instance.SpawnCurrentLevel(currentLevel, levelData.GetCurrentLevel());
